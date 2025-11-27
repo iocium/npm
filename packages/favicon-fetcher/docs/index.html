@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Favicon Fetcher Demo</title>
+</head>
+<body>
+  <h1>Favicon Fetcher (UMD demo)</h1>
+  <p>Fetching favicon for <code>github.com</code> using Google:</p>
+  <img id="favicon" alt="favicon" />
+  <script src="js/bundle.umd.js"></script>
+  <script>
+    const fetcher = new FaviconFetcherLib.FaviconFetcher('github.com', {
+      useCorsProxy: 'https://cors.iocium.workers.dev/?url='
+    });
+    fetcher.fetchFavicon('google').then(result => {
+      const blob = new Blob([result.content], { type: result.contentType });
+      const url = URL.createObjectURL(blob);
+      document.getElementById('favicon').src = url;
+    }).catch(err => {
+      console.error('Error fetching favicon:', err);
+    });
+  </script>
+</body>
+</html>

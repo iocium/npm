@@ -1,0 +1,52 @@
+{
+  "name": "@iocium/ioc-diff",
+  "version": "1.0.3",
+  "description": "A full-featured, ESM-compatible IOC diffing and normalization library + CLI for InfoSec tooling.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "ioc-diff": "dist/bin/ioc-diff.js"
+  },
+  "keywords": [
+    "ioc",
+    "infosec",
+    "threat-intel",
+    "threat-intelligence",
+    "security",
+    "indicators-of-compromise",
+    "yara",
+    "sigma",
+    "misp",
+    "csv",
+    "fuzzy",
+    "diff",
+    "deduplication",
+    "cli",
+    "typescript",
+    "esmodule"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "docs": "typedoc",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "csv-parse": "^5.3.6",
+    "js-yaml": "^4.1.0",
+    "string-similarity": "^4.0.4",
+    "validator": "^13.9.0",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "ts-node": "^10.9.1",
+    "tsup": "^8.4.0",
+    "typedoc": "^0.28.4",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "@iocium/link-age",
+  "version": "0.0.1",
+  "description": "A powerful enrichment tool for estimating the creation time or first-seen date of domains and URLs, aiding phishing detection and threat analysis.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "link-age": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:browser": "tsup --config tsup.browser.config.ts",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "docs": "typedoc"
+  },
+  "keywords": [
+    "domain",
+    "url",
+    "threat-intelligence",
+    "first-seen",
+    "phishing",
+    "reputation",
+    "estimation",
+    "intel",
+    "iocium"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iocium/link-age"
+  },
+  "author": "iocium",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "cross-fetch": "^4.1.0",
+    "date-fns": "^4.1.0",
+    "ora": "^8.2.0",
+    "ts-jest": "^29.4.0",
+    "typedoc": "^0.28.7"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.10",
+    "jest": "^30.0.3",
+    "msw": "^2.10.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}

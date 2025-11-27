@@ -1,0 +1,44 @@
+{
+  "name": "@iocium/favicon-fetcher",
+  "version": "1.5.0",
+  "description": "Favicon and BIMI logo fetcher for Cloudflare Workers and browser-compatible environments",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build:rollup": "rollup -c",
+    "build": "tsc",
+    "test": "jest --coverage",
+    "test:live": "LIVE_TEST=true jest",
+    "docs": "typedoc",
+    "changelog": "auto-changelog -p"
+  },
+  "keywords": [
+    "favicon",
+    "bimi",
+    "cloudflare",
+    "worker",
+    "typescript"
+  ],
+  "author": "Iocium",
+  "license": "MIT",
+  "devDependencies": {
+    "@mswjs/interceptors": "^0.39.3",
+    "@rollup/plugin-typescript": "^12.1.4",
+    "@types/jest": "^30.0.0",
+    "auto-changelog": "^2.4.0",
+    "jest": "^30.0.4",
+    "msw": "^2.10.4",
+    "rollup": "^4.45.1",
+    "ts-jest": "^29.4.0",
+    "tslib": "^2.8.1",
+    "typedoc": "^0.28.7",
+    "typescript": "^5.8.3"
+  }
+}

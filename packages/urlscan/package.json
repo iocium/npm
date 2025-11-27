@@ -1,0 +1,40 @@
+{
+  "name": "@iocium/urlscan",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build:rollup": "rollup -c",
+    "test": "jest --coverage",
+    "test:live": "LIVE_TEST=true jest",
+    "docs": "typedoc"
+  },
+  "keywords": [
+    "urlscan",
+    "api-client",
+    "typescript",
+    "http-client",
+    "rollup",
+    "web-api",
+    "url-scanning",
+    "cybersecurity",
+    "malware-analysis",
+    "network-security",
+    "data-collection"
+  ],
+  "author": "Iocium",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.17",
+    "jest": "^29.7.0",
+    "rollup": "^4.40.2",
+    "ts-jest": "^29.3.2",
+    "tslib": "^2.8.1",
+    "typedoc": "^0.28.4",
+    "typescript": "^5.8.3"
+  }
+}
