@@ -14,8 +14,7 @@
     }
   },
   "scripts": {
-    "build": "tsc",
-    "build:tsup": "tsup",
+    "build": "tsup",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "docs": "typedoc"
