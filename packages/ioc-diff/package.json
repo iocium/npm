@@ -37,7 +37,6 @@
   "dependencies": {
     "csv-parse": "^5.3.6",
     "js-yaml": "^4.1.0",
-    "string-similarity": "^4.0.4",
     "validator": "^13.9.0",
     "yargs": "^17.7.2"
   },

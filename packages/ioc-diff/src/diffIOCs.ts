@@ -1,6 +1,6 @@
 import { IOC, IOCDiffResult, DiffOptions } from './types';
 import { iocKey, isDifferent } from './utils';
-import stringSimilarity from 'string-similarity';
+import { compareTwoStrings } from './stringSimilarity';
 
 /**
  * Compute the difference between two IOC datasets.
@@ -37,7 +37,7 @@ export function diffIOCs(oldIOCs: IOC[], newIOCs: IOC[], options: DiffOptions = 
       let matched = false;
       if (fuzzyMatch) {
         for (const [oldKey, oldIOC] of oldMap.entries()) {
-          const similarity = stringSimilarity.compareTwoStrings(
+          const similarity = compareTwoStrings(
             iocKey(newIOC, matchBy),
             iocKey(oldIOC, matchBy)
           );
