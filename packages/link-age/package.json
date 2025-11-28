@@ -12,7 +12,8 @@
     "build:browser": "tsup --config tsup.browser.config.ts",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "lint": "eslint src --ext .ts"
   },
   "keywords": [
     "domain",

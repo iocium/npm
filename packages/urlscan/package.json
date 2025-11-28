@@ -16,7 +16,8 @@
     "build:rollup": "rollup -c",
     "test": "jest --coverage",
     "test:live": "LIVE_TEST=true jest",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "lint": "eslint src --ext .ts"
   },
   "keywords": [
     "urlscan",

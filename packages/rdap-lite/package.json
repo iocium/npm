@@ -15,7 +15,8 @@
     "test:coverage": "jest --coverage --runInBand --no-cache",
     "typecheck": "tsc --noEmit",
     "docs": "typedoc",
-    "update-bootstraps": "npm run build && node dist/cli.js update-bootstraps"
+    "update-bootstraps": "npm run build && node dist/cli.js update-bootstraps",
+    "lint": "eslint src --ext .ts"
   },
   "keywords": [
     "rdap",

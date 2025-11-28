@@ -16,7 +16,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "docs": "typedoc",
-    "changelog": "auto-changelog -p"
+    "changelog": "auto-changelog -p",
+    "lint": "eslint src --ext .ts"
   },
   "keywords": [
     "favicon",

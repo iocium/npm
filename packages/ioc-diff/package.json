@@ -31,7 +31,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "docs": "typedoc",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "lint": "eslint src --ext .ts"
   },
   "dependencies": {
     "csv-parse": "^5.3.6",

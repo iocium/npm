@@ -26,7 +26,8 @@
     "typecheck": "tsc --noEmit",
     "docs": "typedoc",
     "profile": "node scripts/profile.js",
-    "benchmark": "node scripts/benchmark.js"
+    "benchmark": "node scripts/benchmark.js",
+    "lint": "eslint src --ext .ts"
   },
   "bin": {
     "domhash": "dist/cli.js"

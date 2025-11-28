@@ -18,7 +18,8 @@
     "build": "tsup",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "lint": "eslint src --ext .ts"
   },
   "keywords": [
     "cache",
