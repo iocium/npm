@@ -43,7 +43,7 @@ export class FaviconFetcher {
     
     try {
       parsedUrl = new URL(url);
-    } catch (error) {
+    } catch {
       throw new Error('Invalid BIMI logo URL format');
     }
     

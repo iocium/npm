@@ -1,4 +1,4 @@
-import type { LinkAgeOptions, LinkAgePlugin } from './utils';
+import type { LinkAgeOptions } from './utils';
 
 /**
  * Validates and normalizes the provided options for the link age functionality.

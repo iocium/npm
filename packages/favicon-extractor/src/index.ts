@@ -108,7 +108,7 @@ export class FaviconExtractor {
 
     const result: IconEntry[] = [];
 
-    for (const [mime, entries] of groups.entries()) {
+    for (const entries of groups.values()) {
       const largest = entries
         .map(icon => ({
           ...icon,

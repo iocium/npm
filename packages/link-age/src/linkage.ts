@@ -11,7 +11,6 @@ import { UrlscanEstimator } from './estimators/urlscan';
 import { ShodanEstimator } from './estimators/shodan';
 import { RevocationEstimator } from './estimators/revocation';
 import { CloudflareUrlscanEstimator } from './estimators/cloudflareUrlscan';
-import { CloudflareRadarEstimator } from './estimators/cloudflareRadar';
 import { CommonCrawlEstimator } from './estimators/commoncrawl';
 import { CensysEstimator } from './estimators/censys';
 import { SafeBrowsingEstimator } from './estimators/safebrowsing';
@@ -31,7 +30,7 @@ export class LinkAgeEstimator {
   constructor(options: LinkAgeOptions = {}) {
     this.opts = validateOptions(options);
 
-    const { logHandler: log, providerSecrets } = this.opts;
+    const { logHandler: log } = this.opts;
 
     /**
      * Adds an estimator to the list if enabled.
