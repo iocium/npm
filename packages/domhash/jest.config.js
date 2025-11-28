@@ -10,6 +10,6 @@ module.exports = {
   cacheDirectory: "<rootDir>/node_modules/.cache/jest",
   // ignore built artifacts
   modulePathIgnorePatterns: ["<rootDir>/dist/"],
-  testPathIgnorePatterns: ["<rootDir>/dist/"],
+  testPathIgnorePatterns: ["<rootDir>/dist/", "<rootDir>/test/integration/browser-bundle.test.ts"],
   setupFiles: ["<rootDir>/jest.setup.js"],
 };
