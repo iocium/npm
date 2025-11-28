@@ -88,8 +88,7 @@ async function parseHtml(html: string): Promise<Element> {
     return doc.documentElement;
   }
   // Fallback to LinkeDOM in Node.js; wrap snippet into full HTML document
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const linkedom = require('linkedom');
+  const linkedom = await import('linkedom');
   const wrapper = `<!doctype html><html><head></head><body>${html}</body></html>`;
   const window = linkedom.parseHTML(wrapper);
   const doc = window.document;

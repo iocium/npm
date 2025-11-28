@@ -7,19 +7,22 @@ const isNode: boolean =
   typeof process !== 'undefined' &&
   process.versions != null &&
   typeof process.versions.node === 'string';
-// Cache Node.js crypto and TextEncoder implementations when in Node.js
+// Lazy-load Node.js crypto and TextEncoder implementations when in Node.js
 let nodeCreateHash: ((algorithm: string) => import('crypto').Hash) | null = null;
 let NodeTextEncoder: typeof TextEncoder | null = null;
-if (isNode) {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const crypto = require('crypto');
-  nodeCreateHash = crypto.createHash;
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const util = require('util');
-  NodeTextEncoder = util.TextEncoder || null;
+
+async function initNodeModules() {
+  if (isNode && !nodeCreateHash) {
+    const crypto = await import('crypto');
+    nodeCreateHash = crypto.createHash;
+    const util = await import('util');
+    NodeTextEncoder = util.TextEncoder || null;
+  }
 }
 
 export async function hashStructure(input: string, algo: 'sha256' | 'murmur3' | 'blake3' | 'simhash' | 'minhash' = 'sha256'): Promise<string> {
+  await initNodeModules();
+
   // Fast path for string-based hashes that don't require encoding
   switch (algo) {
     case 'murmur3':

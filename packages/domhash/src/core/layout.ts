@@ -31,7 +31,9 @@ export function extractLayoutFeatures(root: Element): LayoutFeature[] {
         visibility = style.visibility || visibility;
         opacity = style.opacity || opacity;
         position = style.position || position;
-      } catch {}
+      } catch {
+        // Ignore errors from getComputedStyle (e.g., detached elements)
+      }
     } else if ('display' in el) {
       display = (el as any).display || display;
     }

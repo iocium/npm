@@ -69,7 +69,9 @@ export class CommonCrawlEstimator {
         if (/^\d{14}$/.test(ts)) {
           return new Date(`${ts.slice(0, 4)}-${ts.slice(4, 6)}-${ts.slice(6, 8)}`);
         }
-      } catch {}
+      } catch {
+        // Ignore parsing errors for invalid JSON
+      }
       return null;
     }).filter((date): date is Date => date instanceof Date && !isNaN(date.getTime()));
   }
