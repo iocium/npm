@@ -3,14 +3,15 @@ export default {
   preset: 'ts-jest',
   testEnvironment: 'node',
   coverageDirectory: "coverage",
-  setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
+  // setupFilesAfterEnv disabled due to MSW ESM issues with Jest 30
+  // setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
   coveragePathIgnorePatterns: [
     "/node_modules/",
     "test/server.ts",
     "test/setup.ts"
   ],
   testPathIgnorePatterns: [
-    "src/fetcher.test.ts",
+    // Skip live tests (require real network calls)
     "src/fetcher.live.test.ts"
   ],
   // Temporarily disabled due to Jest 30 + MSW ESM issues
