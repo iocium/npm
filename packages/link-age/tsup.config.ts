@@ -5,10 +5,9 @@ export default defineConfig({
   format: ['esm'],
   target: 'es2021',
   dts: true,
-  splitting: false,
-  sourcemap: true,
   clean: true,
-  outDir: 'dist',
+  sourcemap: true,
+  skipNodeModulesBundle: true,
   banner: {
     js: '#!/usr/bin/env node',
   },
