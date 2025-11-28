@@ -5,7 +5,7 @@ export default defineConfig([
   {
     entry: ['src/index.ts', 'src/cli.ts'],
     format: ['esm', 'cjs'],
-    target: 'es2020',
+    target: 'es2021',
     // Enable code-splitting for ESM builds to share common chunks
     splitting: true,
     sourcemap: true,
@@ -21,7 +21,7 @@ export default defineConfig([
   {
     entry: ['src/index.ts'],
     format: ['esm'],
-    target: 'es2019',
+    target: 'es2021',
     splitting: false,
     sourcemap: true,
     clean: false,
@@ -38,7 +38,7 @@ export default defineConfig([
     entry: ['src/index.ts'],
     format: ['iife'],
     globalName: 'domhash',
-    target: 'es2019',
+    target: 'es2021',
     splitting: false,
     sourcemap: true,
     clean: false,

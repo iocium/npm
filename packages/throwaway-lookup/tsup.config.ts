@@ -8,5 +8,5 @@ export default defineConfig({
   outDir: 'dist',
   sourcemap: true,
   clean: true,
-  target: 'es2017'
+  target: 'es2021'
 });
