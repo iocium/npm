@@ -32,6 +32,7 @@
     "@mswjs/interceptors": "^0.39.3",
     "@rollup/plugin-typescript": "^12.1.4",
     "@types/jest": "^30.0.0",
+    "@types/node": "^22.0.0",
     "auto-changelog": "^2.4.0",
     "jest": "^30.0.4",
     "msw": "^2.10.4",
