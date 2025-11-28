@@ -1,3 +1,4 @@
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import { FaviconFetcher, Service } from './fetcher';
 
 describe('FaviconFetcher (mocked)', () => {
@@ -8,13 +9,13 @@ describe('FaviconFetcher (mocked)', () => {
     expect(() => new FaviconFetcher('' as any)).toThrow('Hostname is required');
   });
   it('prepends CORS proxy URL when useCorsProxy is true', async () => {
-    const mockFetch = jest.fn(() =>
+    const mockFetch = vi.fn(() =>
       Promise.resolve(new Response(new ArrayBuffer(10), {
         status: 200,
         headers: { 'Content-Type': 'image/png' }
       }))
     );
-    global.fetch = mockFetch as jest.Mock;
+    global.fetch = mockFetch as Mock;
   
     const fetcher = new FaviconFetcher('github.com', {
       useCorsProxy: true
@@ -27,13 +28,13 @@ describe('FaviconFetcher (mocked)', () => {
     );
   });
   it('prepends custom CORS proxy URL when useCorsProxy is a string', async () => {
-    const mockFetch = jest.fn(() =>
+    const mockFetch = vi.fn(() =>
       Promise.resolve(new Response(new ArrayBuffer(10), {
         status: 200,
         headers: { 'Content-Type': 'image/png' }
       }))
     );
-    global.fetch = mockFetch as jest.Mock;
+    global.fetch = mockFetch as Mock;
   
     const fetcher = new FaviconFetcher('duckduckgo.com', {
       useCorsProxy: 'https://my-cors-proxy/'
@@ -62,12 +63,12 @@ describe('FaviconFetcher (mocked)', () => {
     'faviconim',
     'controld'
   ])('fetchFavicon covers serviceUrls[%s]', async (service) => {
-    global.fetch = jest.fn(() =>
+    global.fetch = vi.fn(() =>
       Promise.resolve(new Response(new ArrayBuffer(10), {
         status: 200,
         headers: { 'Content-Type': 'image/png' }
       }))
-    ) as jest.Mock;
+    ) as Mock;
   
     const fetcher = new FaviconFetcher('example.com');
     const result = await fetcher.fetchFavicon(service as Service);
@@ -78,14 +79,14 @@ describe('FaviconFetcher (mocked)', () => {
    * REQUEST INTEGRITY
    */
   it('enforces iconHorseApiKey over headers.X-API-Key', async () => {
-    const mockFetch = jest.fn(() =>
+    const mockFetch = vi.fn(() =>
       Promise.resolve(new Response(new ArrayBuffer(1), {
         status: 200,
         headers: { 'Content-Type': 'image/png' }
       }))
     );
   
-    global.fetch = mockFetch as jest.Mock;
+    global.fetch = mockFetch as Mock;
   
     const fetcher = new FaviconFetcher('example.com', {
       iconHorseApiKey: 'REAL_KEY',
@@ -111,9 +112,9 @@ describe('FaviconFetcher (mocked)', () => {
    * SERVICE FAILURE
    */
   it('throws error if favicon fetch fails', async () => {
-    global.fetch = jest.fn(() => {
+    global.fetch = vi.fn(() => {
       return Promise.resolve(new Response('Not Found', { status: 404, statusText: 'Not Found' }));
-    }) as jest.Mock;
+    }) as Mock;
   
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('iconHorse')).rejects.toThrow('Failed to fetch favicon from iconHorse');
@@ -125,7 +126,7 @@ describe('FaviconFetcher (mocked)', () => {
     const dummySvg = '<svg></svg>';
     const dummyArrayBuffer = new TextEncoder().encode(dummySvg).buffer;
   
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response(JSON.stringify({
           Answer: [
@@ -139,7 +140,7 @@ describe('FaviconFetcher (mocked)', () => {
         }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
   
     const fetcher = new FaviconFetcher('example.com');
     const result = await fetcher.fetchFavicon('bimi');
@@ -152,7 +153,7 @@ describe('FaviconFetcher (mocked)', () => {
     const dummySvg = '<svg></svg>';
     const dummyArrayBuffer = new TextEncoder().encode(dummySvg).buffer;
   
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns.google')) {
         return Promise.resolve(new Response(JSON.stringify({
           Answer: [
@@ -166,7 +167,7 @@ describe('FaviconFetcher (mocked)', () => {
         }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
   
     const fetcher = new FaviconFetcher('example.com', {
       dohServerUrl: 'https://dns.google/dns-query'
@@ -178,29 +179,29 @@ describe('FaviconFetcher (mocked)', () => {
     expect(result.status).toBe(200);
   });  
   it('throws error if no BIMI TXT record is found', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response(JSON.stringify({ Answer: [] }), { status: 200 }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
 
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('No BIMI l= logo URL found in TXT record');
   });
   it('throws error if DNS response is malformed', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response('{}', { status: 200 }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
   
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('No BIMI l= logo URL found in TXT record');
   });
   it('throws error if BIMI logo fetch fails', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response(JSON.stringify({
           Answer: [
@@ -209,24 +210,24 @@ describe('FaviconFetcher (mocked)', () => {
         }), { status: 200 }));
       }
       return Promise.resolve(new Response(null, { status: 404 }));
-    }) as jest.Mock;
+    }) as Mock;
 
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('Failed to fetch BIMI logo');
   });
   it('throws error if BIMI DNS query fails', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response('Server error', { status: 503, statusText: 'Service Unavailable' }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
   
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('BIMI DNS query failed');
   });
   it('throws error if BIMI logo URL is not HTTPS', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response(JSON.stringify({
           Answer: [
@@ -235,13 +236,13 @@ describe('FaviconFetcher (mocked)', () => {
         }), { status: 200 }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
 
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('BIMI logo URL must use HTTPS');
   });
   it('throws error if BIMI logo URL points to localhost', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response(JSON.stringify({
           Answer: [
@@ -250,13 +251,13 @@ describe('FaviconFetcher (mocked)', () => {
         }), { status: 200 }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
 
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('BIMI logo URL cannot point to private networks');
   });
   it('throws error if BIMI logo URL points to private IP ranges', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response(JSON.stringify({
           Answer: [
@@ -265,13 +266,13 @@ describe('FaviconFetcher (mocked)', () => {
         }), { status: 200 }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
 
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('BIMI logo URL cannot point to private networks');
   });
   it('throws error if BIMI logo URL contains suspicious characters', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response(JSON.stringify({
           Answer: [
@@ -280,13 +281,13 @@ describe('FaviconFetcher (mocked)', () => {
         }), { status: 200 }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
 
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('BIMI logo URL contains invalid characters');
   });
   it('throws error if BIMI logo URL has invalid format', async () => {
-    global.fetch = jest.fn((url: RequestInfo) => {
+    global.fetch = vi.fn((url: RequestInfo) => {
       if (typeof url === 'string' && url.includes('dns-query')) {
         return Promise.resolve(new Response(JSON.stringify({
           Answer: [
@@ -295,7 +296,7 @@ describe('FaviconFetcher (mocked)', () => {
         }), { status: 200 }));
       }
       return Promise.reject(new Error('Unexpected fetch'));
-    }) as jest.Mock;
+    }) as Mock;
 
     const fetcher = new FaviconFetcher('example.com');
     await expect(fetcher.fetchFavicon('bimi')).rejects.toThrow('Invalid BIMI logo URL format');

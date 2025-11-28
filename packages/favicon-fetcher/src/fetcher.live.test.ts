@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { FaviconFetcher } from './fetcher';
 
 const liveTest = process.env.LIVE_TEST === 'true';

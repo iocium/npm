@@ -14,8 +14,8 @@
   "scripts": {
     "build:rollup": "rollup -c",
     "build": "tsup",
-    "test": "jest --coverage",
-    "test:live": "LIVE_TEST=true jest",
+    "test": "vitest run --coverage",
+    "test:live": "LIVE_TEST=true vitest run",
     "docs": "typedoc",
     "changelog": "auto-changelog -p",
     "lint": "eslint src --ext .ts"
@@ -32,16 +32,15 @@
   "devDependencies": {
     "@mswjs/interceptors": "^0.40.0",
     "@rollup/plugin-typescript": "^12.1.4",
-    "@types/jest": "^30.0.0",
     "@types/node": "^24.10.1",
+    "@vitest/coverage-v8": "^4.0.14",
     "auto-changelog": "^2.4.0",
-    "jest": "^30.2.0",
     "msw": "^2.10.4",
     "rollup": "^4.45.1",
-    "ts-jest": "^29.4.0",
     "tslib": "^2.8.1",
     "tsup": "^8.5.0",
     "typedoc": "^0.28.7",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^4.0.14"
   }
 }
