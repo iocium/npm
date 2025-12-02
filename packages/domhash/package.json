@@ -49,7 +49,7 @@
     "htmlparser2": "^10.0.0",
     "linkedom": "^0.18.11",
     "puppeteer-core": "^24.11.2",
-    "typedoc": "^0.28.7"
+    "typedoc": "^0.28.15"
   },
   "devDependencies": {
     "@types/bun": "^1.2.17",
@@ -61,7 +61,7 @@
     "jest-environment-jsdom": "^30.0.2",
     "jsdom": "^27.2.0",
     "miniflare": "^4.20250617.4",
-    "ts-jest": "^29.4.0",
+    "ts-jest": "^29.4.6",
     "tsup": "^8.5.0",
     "typescript": "^5.0.0"
   }
