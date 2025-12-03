@@ -38,8 +38,8 @@
     "cross-fetch": "^4.1.0",
     "date-fns": "^4.1.0",
     "ora": "^9.0.0",
-    "ts-jest": "^29.4.0",
-    "typedoc": "^0.28.7"
+    "ts-jest": "^29.4.6",
+    "typedoc": "^0.28.15"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
